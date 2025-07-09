@@ -25,7 +25,12 @@ while True:
                 f.write(f"{description};{amount};{time}\n")
 
         elif user_action.startswith("show"):
+            list_of_expenses = list(df["amount"])
+            total = sum(list_of_expenses)
+
             print(df)
+            print(f"Total Expenses: {total}")
+            print(" ")
 
         elif user_action.startswith("edit"):
 
@@ -65,6 +70,7 @@ while True:
                 user_delete = int(input("Enter the number to delete: "))
                 if user_delete in df.index:
                     df = df.drop(user_delete)
+                    df.to_csv("data.csv", sep=";", index=False)
                     print("successfully deleted")
 
                 else:
