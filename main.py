@@ -2,6 +2,7 @@ import pandas as pd
 from datetime import datetime
 
 file = "data.csv"
+df = pd.read_csv(file, sep=";")
 time = datetime.now().strftime("%Y-%m-%d")
 
 print("EXPENSE TRACKER")
@@ -9,7 +10,7 @@ print("EXPENSE TRACKER")
 while True:
     try:
 
-        user_action = input("Type add, show, edit, or exit: ")
+        user_action = input("Type add, show, edit, delete or exit: ")
 
         if user_action.startswith("add"):
 
@@ -21,10 +22,13 @@ while True:
             with open(file, "a", newline="") as f:
                 f.write(f"{description};{amount};{time}\n")
 
+        elif user_action.startswith("show"):
+            df.index += 1
+            print(df)
+
         elif user_action.startswith("edit"):
 
             with open(file, "r") as f:
-                df = pd.read_csv(f, sep=";")
 
                 df.index += 1
 
